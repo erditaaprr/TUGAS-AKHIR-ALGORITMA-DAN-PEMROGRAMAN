@@ -1,48 +1,16 @@
-User Manual – Aplikasi Inventori Coffee Shop
-1. Deskripsi Program
+DESKRIPSI PROGRAM
 Aplikasi ini adalah program Python berbasis teks untuk mengelola inventori di sebuah Coffee Shop. Program memungkinkan pengguna untuk menambahkan, melihat, mengedit, menghapus, dan melaporkan stok bahan baku maupun menu minuman.
 
-Semua data disimpan dalam file coffeeshop_data.json agar dapat diakses kembali saat program dijalankan ulang.
-
-2. Persyaratan Sistem
-Python 3.6 atau lebih tinggi
 Dapat dijalankan melalui:
-•Terminal / Command Prompt
-•Visual Studio Code
-•Google Colab
+Terminal / Command Prompt
+Visual Studio Code
+Google Colab
 
-3. Struktur File
-Nama File	Keterangan
-inventori_kopi.py	File utama berisi kode program
-coffeeshop_data.json	File penyimpanan data bahan & menu
-user_manual.md	File dokumentasi ini
-
-4. Cara Menjalankan Program
-Di Terminal / VS Code:
-Pastikan Python sudah terpasang.
-
-Buka folder tempat file inventori_kopi.py berada.
-
-Jalankan perintah berikut:
-•bash
-•Copy
-•Edit
-python inventori_kopi.py
-Di Google Colab:
-Upload file inventori_kopi.py.
-
-Jalankan sel dengan perintah berikut:
-•python
-•Copy
-•Edit
-!python inventori_kopi.py
-File coffeeshop_data.json akan otomatis muncul di direktori Colab.
-
-5. Panduan Menu Program
+Panduan Menu Program
 Saat program dijalankan, kamu akan melihat tampilan menu:
-•markdown
-•Copy
-•Edit
+markdown
+Copy
+Edit
 
 === Menu Inventori Coffee Shop ===
 1. Tambah Bahan/Menu
@@ -51,45 +19,70 @@ Saat program dijalankan, kamu akan melihat tampilan menu:
 4. Hapus Data
 5. Laporan Stok
 6. Simpan & Keluar
-
 No	Menu	Fungsi
-1. Tambah Bahan/Menu	Menambahkan item baru (kode, nama, jenis, stok). Kode harus unik.
-2. Lihat Semua Data	Menampilkan semua data bahan dan menu yang tersimpan.
-3. Edit Stok	Mengubah stok dari item berdasarkan kode.
-4. Hapus Data	Menghapus item dari daftar inventori berdasarkan kode.
-5. Laporan Stok	Menampilkan daftar item berdasarkan stok terbanyak ke terkecil.
-6. Simpan & Keluar	Menyimpan data ke file JSON dan mengakhiri program.
+1	Tambah Bahan/Menu	Menambahkan item baru (kode, nama, jenis, stok). Kode harus unik.
+2	Lihat Semua Data	Menampilkan semua data bahan dan menu yang tersimpan.
+3	Edit Stok	Mengubah stok dari item berdasarkan kode.
+4	Hapus Data	Menghapus item dari daftar inventori berdasarkan kode.
+5	Laporan Stok	Menampilkan daftar item berdasarkan stok terbanyak ke terkecil.
+6	Simpan & Keluar	Menyimpan data ke file JSON dan mengakhiri program.
 
-6. Format Input
-Field	Format	Contoh
-Kode	String unik	DRK001
-Nama	Teks bebas	Matcha Latte
-Jenis	'bahan' / 'menu'	menu
-Stok	Angka bulat positif	25
+PENJELASAN SETIAP CODE
+1. Impor Perpustakaan
+import json #mengambil fungsi utk menyimpan dan membaca data
+import time # OPTIMASI: untuk mengukur waktu fungsi eksekusi
+json : Digunakan untuk menyimpan dan membaca data dalam format JSON.
+time : Digunakan untuk mengukur waktu eksekusi fungsi, membantu dalam optimasi.
 
-7. Fitur Optimasi & Error Handling
- Validasi kode agar tidak duplikat
- Validasi input stok (harus berupa angka dan tidak negatif)
- Waktu eksekusi dicatat dengan time.time() (untuk tampil & laporan)
- Data aman tersimpan dalam file .json
- Penanganan error jika file tidak ditemukan (try-except)
+INSTALASI DATA
+data_kopi = [] # list untuk menyimpan data inventori
+data_kopi : Daftar kosong yang akan menyimpan data item (bahan atau menu) di kedai kopi.
 
-8. Catatan Tambahan
-File coffeeshop_data.json akan otomatis dibuat jika belum ada.
+FUNGSI UNTUK MENYIMPAN DATA
+def save_data():
+    with open("coffeeshop_data.json", "w") as f: # buka file dalam mode tulis
+        json.dump(data_kopi, f) # simpan data dalam format JSON
+save_data : Fungsi ini menyimpan data inventaris ke dalam file JSON. Jika file tidak ada, akan dibuat baru.
 
-Jangan mengedit file JSON secara manual agar tidak merusak strukturnya.
+FUNGSI UNTUK MEMUAT DATA
+def load_data():
+    try:
+        with open("coffeeshop_data.json", "r") as f: # buka file dalam mode baca
+            return json.load(f) # ambil dan kembalikan data
+    except:
+        return [] # jika file belum ada atau rusak, mulai dari kosong
+load_data : Fungsi ini memuat data dari file JSON. Jika file tidak ada atau rusak, akan mengembalikan daftar kosong.
 
-Data hanya akan tersimpan saat memilih menu 6. Simpan & Keluar.
+FUNGSI UNTUK MENCARI ITEM
+def search_item(kode):
+    for d in data_kopi: # periksa tiap item dalam list
+        if d['kode'] == kode: # cocokkan kode
+            return d
+    return None # jika tidak ditemukan
+search_item : Fungsi ini mencari item berdasarkan kode. Jika ditemukan, barang tersebut akan dikembalikan; jika tidak, akan mengembalikan None.
 
-Gunakan jenis 'menu' untuk produk jadi (misal: Matcha Latte, Cappuccino ) dan 'bahan' untuk bahan baku (misal: Susu, Gula, Kopi Bubuk).
+FUNGSI UNTUK MENAMBAH ITEM
+tambah_item : Fungsi ini menambahkan item baru ke dalam inventaris. Memeriksa apakah kode sudah ada, dan melakukan validasi untuk jenis dan stoK
 
-9. Saran Pengembangan
-Fitur lanjutan yang bisa ditambahkan:
+FUNGSI UNTUK MELIHAT SEMUA DATA
+ihat_all : Fungsi ini menampilkan semua item dalam inventaris. Menghitung waktu yang dibutuhkan untuk menampilkan data.
 
-pencarian berdasarkan nama item
+FUNGSI UNTUK MENGEDIT STOK
+edit_stok : Fungsi ini mengubah jumlah stok item yang ada. Memeriksa apakah barang ditemukan dan melakukan validasi pada input stok baru.
 
- Filter berdasarkan jenis (menu/bahan)
+FUNGSI UNTUK MENGAHPUS ITEM
+hapus_item : Fungsi ini menghapus item dari inventaris berdasarkan kode. Jika item tidak ditemukan, akan memberikan pesan yang sesuai.
 
- Ekspor laporan stok ke file .csv atau .txt
+FUNGSI UNTUK MELAPORKAN STOK
+report_stok : Fungsi ini menampilkan laporan stok yang diurutkan dari yang terbanyak. Menghitung waktu yang dibutuhkan untuk memproses laporan.
 
-Mengganti struktur list ke dictionary untuk pencarian lebih cepat (O(1))
+Kesimpulan
+
+Program ini memberikan antarmuka yang sederhana untuk mengelola inventaris di kedai kopi, memungkinkan pengguna untuk menambah, melihat, mengedit, menghapus, dan melaporkan stok item. Dengan menggunakan JSON untuk penyimpanan data, program ini juga memastikan bahwa data dapat dipertahankan antara sesi.
+
+
+
+
+
+
+        
