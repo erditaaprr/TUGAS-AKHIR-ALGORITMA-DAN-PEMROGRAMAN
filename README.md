@@ -39,26 +39,12 @@ data_kopi = [] # list untuk menyimpan data inventori
 data_kopi : Daftar kosong yang akan menyimpan data item (bahan atau menu) di kedai kopi.
 
 FUNGSI UNTUK MENYIMPAN DATA
-def save_data():
-    with open("coffeeshop_data.json", "w") as f: # buka file dalam mode tulis
-        json.dump(data_kopi, f) # simpan data dalam format JSON
 save_data : Fungsi ini menyimpan data inventaris ke dalam file JSON. Jika file tidak ada, akan dibuat baru.
 
 FUNGSI UNTUK MEMUAT DATA
-def load_data():
-    try:
-        with open("coffeeshop_data.json", "r") as f: # buka file dalam mode baca
-            return json.load(f) # ambil dan kembalikan data
-    except:
-        return [] # jika file belum ada atau rusak, mulai dari kosong
 load_data : Fungsi ini memuat data dari file JSON. Jika file tidak ada atau rusak, akan mengembalikan daftar kosong.
 
 FUNGSI UNTUK MENCARI ITEM
-def search_item(kode):
-    for d in data_kopi: # periksa tiap item dalam list
-        if d['kode'] == kode: # cocokkan kode
-            return d
-    return None # jika tidak ditemukan
 search_item : Fungsi ini mencari item berdasarkan kode. Jika ditemukan, barang tersebut akan dikembalikan; jika tidak, akan mengembalikan None.
 
 FUNGSI UNTUK MENAMBAH ITEM
