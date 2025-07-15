@@ -68,11 +68,11 @@ Jenis	'bahan' / 'menu'	menu
 Stok	Angka bulat positif	25
 
 7. Fitur Optimasi & Error Handling
-✅ Validasi kode agar tidak duplikat
-✅ Validasi input stok (harus berupa angka dan tidak negatif)
-✅ Waktu eksekusi dicatat dengan time.time() (untuk tampil & laporan)
-✅ Data aman tersimpan dalam file .json
-✅ Penanganan error jika file tidak ditemukan (try-except)
+ Validasi kode agar tidak duplikat
+ Validasi input stok (harus berupa angka dan tidak negatif)
+ Waktu eksekusi dicatat dengan time.time() (untuk tampil & laporan)
+ Data aman tersimpan dalam file .json
+ Penanganan error jika file tidak ditemukan (try-except)
 
 8. Catatan Tambahan
 File coffeeshop_data.json akan otomatis dibuat jika belum ada.
@@ -86,10 +86,10 @@ Gunakan jenis 'menu' untuk produk jadi (misal: Matcha Latte, Cappuccino ) dan 'b
 9. Saran Pengembangan
 Fitur lanjutan yang bisa ditambahkan:
 
-🔍 Pencarian berdasarkan nama item
+pencarian berdasarkan nama item
 
-📂 Filter berdasarkan jenis (menu/bahan)
+ Filter berdasarkan jenis (menu/bahan)
 
-📤 Ekspor laporan stok ke file .csv atau .txt
+ Ekspor laporan stok ke file .csv atau .txt
 
 Mengganti struktur list ke dictionary untuk pencarian lebih cepat (O(1))
